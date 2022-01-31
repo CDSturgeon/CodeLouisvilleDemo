@@ -7,7 +7,8 @@ public class Alphabet
 {
     public static void Menu()
     {
-        char input = new();
+        char input;
+
         Console.Clear();
         Console.WriteLine("How do you want to print the alphabet?\n" +
                               "F: Forward\n" +
@@ -37,11 +38,12 @@ public class Alphabet
     private static void Wait(string text)
     {
         Console.WriteLine($"Press the spacebar to {text}.");
-        bool space = false;
-        while (space == false)
+
+        bool spacebar = false;
+        while (spacebar == false)
         {
             if (Console.ReadKey(true).Key == ConsoleKey.Spacebar)
-                space = true;
+                spacebar = true;
         }
         return;
     }
@@ -49,7 +51,6 @@ public class Alphabet
     private static string PrintAlphabet()
     {
         int x = EveryXLetter();
-
         StringBuilder alphabet = new();
 
         for (char alpha = 'A'; alpha <= 'Z'; alpha = (char)(alpha + x))
@@ -62,7 +63,6 @@ public class Alphabet
     public static string PrintAlphabetBackwards()
     {
         int x = EveryXLetter();
-
         StringBuilder alphabet = new();
 
         for (char alpha = 'Z'; alpha >= 'A'; alpha = (char)(alpha - x))
@@ -84,20 +84,23 @@ public class Alphabet
 
     public static int EveryXLetter()
     {
-        Console.WriteLine("\n\nHow would you like to print the alphabet?\n" +
+        Console.WriteLine("\nHow would you like to print the alphabet?\n" +
                           "1: Print all letters\n" +
                           "2: Print every other letter\n" +
                           "or type any other number to print every 'x' letter\n");
+
         while (true)
         {
-            string input = Console.ReadLine();
+            //string? declares string as nullable, and removes warning on Console.ReadLine
+            string? input = Console.ReadLine();
+
             if (int.TryParse(input, out int x))
             {
                 if (x > 0)
                     return x;
                 else
                 {
-                    Console.WriteLine("\nSelection must be greater than 0");
+                    Console.WriteLine("\nSelection must be greater than 0"); //loop continues
                 }
             }
             else
