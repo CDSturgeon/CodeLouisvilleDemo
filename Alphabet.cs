@@ -9,29 +9,32 @@ public class Alphabet
     {
         char input;
 
-        Console.Clear();
-        Console.WriteLine("How do you want to print the alphabet?\n" +
-                              "F: Forward\n" +
-                              "B: Backward\n" +
-                              "Q: Quit");
-
-        input = Console.ReadKey().KeyChar;
-        switch (input) //Switch on Key enum
+        while (true)
         {
-            case 'F' or 'f':
-                Console.WriteLine("\nAlphabet in order\n" + Alphabet.PrintAlphabet() + Environment.NewLine);
-                Wait("continue");
-                break;
-            case 'B' or 'b':
-                Console.WriteLine("\nAlphabet in reverse\n" + Alphabet.PrintAlphabetBackwards() + Environment.NewLine);
-                Wait("continue");
-                break;
-            case 'Q' or 'q':
-                return;
-            default:
-                Console.WriteLine($"\nSelection '{input}' not recognized.\n");
-                Wait("try again");
-                break;
+            Console.Clear();
+            Console.WriteLine("How do you want to print the alphabet?\n" +
+                                  "F: Forward\n" +
+                                  "B: Backward\n" +
+                                  "Q: Quit");
+
+            input = Console.ReadKey().KeyChar;
+            switch (input) //Switch on Key enum
+            {
+                case 'F' or 'f':
+                    Console.WriteLine("\nAlphabet in order\n" + Alphabet.PrintAlphabet() + Environment.NewLine);
+                    Wait("continue");
+                    break;
+                case 'B' or 'b':
+                    Console.WriteLine("\nAlphabet in reverse\n" + Alphabet.PrintAlphabetBackwards() + Environment.NewLine);
+                    Wait("continue");
+                    break;
+                case 'Q' or 'q':
+                    return;
+                default:
+                    Console.WriteLine($"\nSelection '{input}' not recognized.\n");
+                    Wait("try again");
+                    break;
+            }
         }
     }
 
@@ -84,10 +87,10 @@ public class Alphabet
 
     public static int EveryXLetter()
     {
-        Console.WriteLine("\nHow would you like to print the alphabet?\n" +
+        Console.WriteLine("\n\nHow would you like to print the alphabet?\n" +
                           "1: Print all letters\n" +
                           "2: Print every other letter\n" +
-                          "or type any other number to print every 'x' letter\n");
+                          "or type any other number to print every 'x' letter");
 
         while (true)
         {
@@ -99,15 +102,11 @@ public class Alphabet
                 if (x > 0)
                     return x;
                 else
-                {
                     Console.WriteLine("\nSelection must be greater than 0"); //loop continues
-                }
             }
             else
-            {
                 Console.WriteLine($"\n{input} is not an integer.\n" +
                                   "Please enter a whole number:");
-            }
         }        
     }
 }
