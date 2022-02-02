@@ -22,11 +22,11 @@ public class Alphabet
             switch (input) //Switch on Key enum
             {
                 case 'F' or 'f':
-                    Console.WriteLine("\nAlphabet in order\n" + Alphabet.PrintAlphabet() + Environment.NewLine);
+                    Console.WriteLine("\nAlphabet in order\n" + Alphabet.PrintAlphabet(Every_n_Letter()) + Environment.NewLine);
                     Wait("continue");
                     break;
                 case 'B' or 'b':
-                    Console.WriteLine("\nAlphabet in reverse\n" + Alphabet.PrintAlphabetBackwards() + Environment.NewLine);
+                    Console.WriteLine("\nAlphabet in reverse\n" + Alphabet.PrintAlphabetBackwards(Every_n_Letter()) + Environment.NewLine);
                     Wait("continue");
                     break;
                 case 'Q' or 'q':
@@ -44,6 +44,7 @@ public class Alphabet
         Console.WriteLine($"Press the spacebar to {text}.");
 
         bool spacebar = false;
+
         while (spacebar == false)
         {
             if (Console.ReadKey(true).Key == ConsoleKey.Spacebar)
@@ -52,24 +53,22 @@ public class Alphabet
         return;
     }
 
-    private static string PrintAlphabet()
+    private static string PrintAlphabet(int n)
     {
-        int x = EveryXLetter();
         StringBuilder alphabet = new();
 
-        for (char alpha = 'A'; alpha <= 'Z'; alpha = (char)(alpha + x))
+        for (char alpha = 'A'; alpha <= 'Z'; alpha = (char)(alpha + n))
         {
             alphabet.Append(alpha);
         }
         return alphabet.ToString();
     }
 
-    public static string PrintAlphabetBackwards()
+    public static string PrintAlphabetBackwards(int n)
     {
-        int x = EveryXLetter();
         StringBuilder alphabet = new();
 
-        for (char alpha = 'Z'; alpha >= 'A'; alpha = (char)(alpha - x))
+        for (char alpha = 'Z'; alpha >= 'A'; alpha = (char)(alpha - n))
         {
             alphabet.Append(alpha);
         }
@@ -86,7 +85,7 @@ public class Alphabet
     //    return alphabet.ToString();
     //}
 
-    public static int EveryXLetter()
+    public static int Every_n_Letter()
     {
         Console.WriteLine("\n\nHow would you like to print the alphabet?\n" +
                           "1: Print all letters\n" +
@@ -98,10 +97,10 @@ public class Alphabet
             //string? declares string as nullable, and removes warning on Console.ReadLine
             string? input = Console.ReadLine();
 
-            if (int.TryParse(input, out int x))
+            if (int.TryParse(input, out int n))
             {
-                if (x > 0)
-                    return x;
+                if (n > 0)
+                    return n;
                 else
                     Console.WriteLine("\nSelection must be greater than 0"); //loop continues
             }
