@@ -18,6 +18,7 @@ public class Alphabet
                                   "Q: Quit");
 
             input = Console.ReadKey().KeyChar;
+
             switch (input) //Switch on Key enum
             {
                 case 'F' or 'f':
