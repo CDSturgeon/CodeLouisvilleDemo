@@ -27,14 +27,14 @@ public class Alphabet
                 //Print alphabet forward
                 case 'F' or 'f':
                     Console.WriteLine("\nAlphabet in order\n" +
-                                      Alphabet.BuildAlphabetA_Z(Every_n_Letter()) +
+                                      BuildAlphabetA_Z(Every_n_Letter()) +
                                       Environment.NewLine);
                     Wait(cont);
                     break;
                 //Print alphabet backward
                 case 'B' or 'b':
                     Console.WriteLine("\nAlphabet in reverse\n" +
-                                      Alphabet.BuildAlphabetZ_A(Every_n_Letter()) +
+                                      BuildAlphabetZ_A(Every_n_Letter()) +
                                       Environment.NewLine);
                     Wait(cont);
                     break;
@@ -51,8 +51,6 @@ public class Alphabet
     }
 
     //Pause program, wait for user to press spacebar to continue
-    //
-    //Should the Console.WriteLine be removed? The instructions are specific to the function of this method.
     private static void Wait(string text)
     {
         Console.WriteLine($"Press the spacebar to {text}.");
@@ -113,9 +111,7 @@ public class Alphabet
     //    return alphabet.ToString();
     //}
 
-    //Collect input from user, parse string to int, error checking inputs
-    //
-    //Are there too many things happening in this method?
+    //Collect input from user
     public static int Every_n_Letter()
     {
         Console.WriteLine("\n\nHow would you like to print the alphabet?\n" +
@@ -124,6 +120,13 @@ public class Alphabet
                           "or type any other number to print every 'n' letter");
         Console.Write("Enter a value for n: ");
 
+        int n = IsIntegerGreaterThan(0);
+        return n;
+    }
+
+    //Test user input for validity
+    public static int IsIntegerGreaterThan(int x)
+    {
         while (true)
         {
             //string? declares string as nullable, and removes warning on Console.ReadLine
@@ -131,15 +134,15 @@ public class Alphabet
 
             if (int.TryParse(input, out int n))
             {
-                if (n > 0)
+                if (n > x)
                     return n;
                 else
-                    Console.Write("\nSelection must be greater than 0\n" +
-                                  "Enter a number greater than 0: "); //loop continues
+                    Console.Write($"\nSelection must be greater than {x}\n" +
+                                  $"Enter a number greater than {x}: "); //loop continues
             }
             else
                 Console.Write($"\n{input} is not an integer.\n" +
                                   "Please enter a whole number: ");
-        }        
+        }
     }
 }
