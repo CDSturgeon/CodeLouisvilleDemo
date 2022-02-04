@@ -5,11 +5,12 @@ namespace CodeLouisvilleDemo;
 
 public class Alphabet
 {
+    public static string? number { get; private set; }
+
     //Menu loops until user quits program
     public static void Menu()
     {
-        char input;
-        string cont = "continue";//string used more than once, variable created to reduce duplication
+        const string cont = "continue";//string used more than once, variable created to reduce duplication
 
         while (true)
         {
@@ -20,26 +21,27 @@ public class Alphabet
                               "Q: Quit");
 
             Console.Write("Selection: ");//User inputs shows on same line
-            input = Console.ReadKey().KeyChar;
+            char input = Console.ReadKey().KeyChar;
+            string selection = input.ToString().ToUpper();
 
-            switch (input)
+            switch (selection)
             {
                 //Print alphabet forward
-                case 'F' or 'f':
+                case "F":
                     Console.WriteLine("\nAlphabet in order\n" +
-                                      BuildAlphabetA_Z(Every_n_Letter()) +
+                                      BuildAlphabet('A','Z',selection,Every_n_Letter()) +
                                       Environment.NewLine);
                     Wait(cont);
                     break;
                 //Print alphabet backward
-                case 'B' or 'b':
+                case "B":
                     Console.WriteLine("\nAlphabet in reverse\n" +
-                                      BuildAlphabetZ_A(Every_n_Letter()) +
+                                      BuildAlphabet('Z', 'A', selection, Every_n_Letter()) +
                                       Environment.NewLine);
                     Wait(cont);
                     break;
                 //Quit program
-                case 'Q' or 'q':
+                case "Q":
                     return;
                 //Invalid input
                 default:
@@ -55,61 +57,50 @@ public class Alphabet
     {
         Console.WriteLine($"Press the spacebar to {text}.");
 
-        bool spacebar = false;
-
-        while (spacebar == false)
+        while (true)
         {
             if (Console.ReadKey(true).Key == ConsoleKey.Spacebar)
-                spacebar = true;
+                return;
         }
-        return;
     }
 
     //Create the alphabet string forwards, showing every n letter
-    private static string BuildAlphabetA_Z(int n)
+    private static string BuildAlphabet(char start, char end, string selection, int n)
     {
         StringBuilder alphabet = new();
 
-        for (char alpha = 'A'; alpha <= 'Z'; alpha = (char)(alpha + n))
+        for (char letter = start; KeepLooping(selection,letter, end);)
         {
-            alphabet.Append(alpha);
+            alphabet.Append(letter);
+
+            if (selection == "F")
+                letter = (char)(letter + n);
+            if (selection == "B")
+                letter = (char)(letter - n);
         }
+
         return ShowEvery_n_LetterText(n) + alphabet.ToString();
     }
 
-    //Create the alphabet string backwards, showing every n letter
-    public static string BuildAlphabetZ_A(int n)
+    //Logic test for the BuildAlphabet 'for' loop
+    private static bool KeepLooping(string selection, char letter, char end)
     {
-        StringBuilder alphabet = new();
-        //string output;
-
-        for (char alpha = 'Z'; alpha >= 'A'; alpha = (char)(alpha - n))
-        {
-            alphabet.Append(alpha);
-        }
-        return ShowEvery_n_LetterText(n) + alphabet.ToString();
+        if (selection == "F")
+            return letter <= end;
+        if (selection == "B")
+            return letter >= end;
+        else
+            return false;//prevents endless loop
     }
 
     //Returns more output text when skipping letters
     public static string ShowEvery_n_LetterText(int n)
     {
-        string clarify = "";
         if (n > 1)
-        {
-            clarify = $"Showing every {n} letters\n";
-        }
-        return clarify;
-    }
+            return $"Showing every {n} letters\n";
 
-    //public static string PrintAlphabetSkipOneLetter()
-    //{
-    //    StringBuilder alphabet = new();
-    //    for (char alpha = 'A'; alpha <= 'Z'; alpha = (char)(alpha + 2))//cast (alpha + 2) as type char
-    //    {
-    //        alphabet.Append(alpha);
-    //    }
-    //    return alphabet.ToString();
-    //}
+        return "";
+    }
 
     //Collect input from user
     public static int Every_n_Letter()
@@ -120,12 +111,11 @@ public class Alphabet
                           "or type any other number to print every 'n' letter");
         Console.Write("Enter a value for n: ");
 
-        int n = IsIntegerGreaterThan(0);
-        return n;
+        return IsIntegerGreaterThan(0);
     }
 
     //Test user input for validity
-    public static int IsIntegerGreaterThan(int x)
+    public static int IsIntegerGreaterThan(int min)
     {
         while (true)
         {
@@ -134,11 +124,11 @@ public class Alphabet
 
             if (int.TryParse(input, out int n))
             {
-                if (n > x)
+                if (n > min)
                     return n;
                 else
-                    Console.Write($"\nSelection must be greater than {x}\n" +
-                                  $"Enter a number greater than {x}: "); //loop continues
+                    Console.Write($"\nSelection must be greater than {min}\n" +
+                                  $"Enter a number greater than {min}: "); //loop continues
             }
             else
                 Console.Write($"\n{input} is not an integer.\n" +
