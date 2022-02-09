@@ -5,8 +5,6 @@ namespace CodeLouisvilleDemo;
 
 public class Alphabet
 {
-    public static string? number { get; private set; }
-
     //Menu loops until user quits program
     public static void Menu()
     {
@@ -42,6 +40,7 @@ public class Alphabet
                     break;
                 //Quit program
                 case "Q":
+                    Console.WriteLine("\n\nGoodbye.");
                     return;
                 //Invalid input
                 default:
