@@ -8,6 +8,32 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CodeLouisvilleLibrary\CodeLouisvilleLibrary.csproj" />
+    <Compile Remove="CLLibrary\CLAppBase.cs" />
+    <Compile Remove="CLLibrary\obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
+    <Compile Remove="CLLibrary\obj\Debug\net6.0\CLLibrary.AssemblyInfo.cs" />
+    <Compile Remove="CLLibrary\obj\Debug\net6.0\CLLibrary.GlobalUsings.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="CLLibrary\bin\Debug\net6.0\CLLibrary.pdb" />
+    <None Remove="CLLibrary\bin\Debug\net6.0\CLLibrary.dll" />
+    <None Remove="CLLibrary\bin\Debug\net6.0\CLLibrary.deps.json" />
+    <None Remove="CLLibrary\bin\Debug\net6.0\ref\CLLibrary.dll" />
+    <None Remove="CLLibrary\obj\CLLibrary.csproj.nuget.g.targets" />
+    <None Remove="CLLibrary\obj\CLLibrary.csproj.nuget.g.props" />
+    <None Remove="CLLibrary\obj\project.nuget.cache" />
+    <None Remove="CLLibrary\obj\CLLibrary.csproj.nuget.dgspec.json" />
+    <None Remove="CLLibrary\obj\project.assets.json" />
+    <None Remove="CLLibrary\obj\Debug\net6.0\CLLibrary.csproj.FileListAbsolute.txt" />
+    <None Remove="CLLibrary\obj\Debug\net6.0\CLLibrary.assets.cache" />
+    <None Remove="CLLibrary\obj\Debug\net6.0\CLLibrary.pdb" />
+    <None Remove="CLLibrary\obj\Debug\net6.0\CLLibrary.csproj.AssemblyReference.cache" />
+    <None Remove="CLLibrary\obj\Debug\net6.0\CLLibrary.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Remove="CLLibrary\obj\Debug\net6.0\CLLibrary.dll" />
+    <None Remove="CLLibrary\obj\Debug\net6.0\CLLibrary.csproj.CoreCompileInputs.cache" />
+    <None Remove="CLLibrary\obj\Debug\net6.0\CLLibrary.AssemblyInfoInputs.cache" />
+    <None Remove="CLLibrary\obj\Debug\net6.0\ref\CLLibrary.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="CLLibrary\CLLibrary.csproj" />
   </ItemGroup>
 </Project>
